@@ -81,12 +81,16 @@ addButton.addEventListener('click', () => {
 
 function populateCookiesToTable(filter = '' ) {
     const cookiesObj = getCookiesObj();
-
+    
     listTable.innerHTML = '';
 
     for (const key in cookiesObj) {
         let cookieName = key;
         let cookieValue = cookiesObj[key];
+        
+        if (!cookieName || !cookieValue) {
+            continue;
+        }
 
         if (cookiesObj.hasOwnProperty(key) && (isMatching(cookieName, filter) || isMatching(cookieValue, filter))) {
             let newTr = document.createElement('tr');
