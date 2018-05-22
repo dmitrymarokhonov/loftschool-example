@@ -73,8 +73,8 @@ addButton.addEventListener('click', () => {
         document.cookie = `${cookieName}=${cookieValue}`;
     }
 
-    addNameInput.value = '';
-    addValueInput.value = '';
+    // addNameInput.value = '';
+    // addValueInput.value = '';
 
     populateCookiesToTable(filterNameInput.value);
 });
@@ -84,7 +84,7 @@ function populateCookiesToTable(filter = '' ) {
     
     listTable.innerHTML = '';
 
-    for (const key in cookiesObj) {
+    for (const key of Object.keys(cookiesObj)) {
         let cookieName = key;
         let cookieValue = cookiesObj[key];
         
@@ -99,17 +99,15 @@ function populateCookiesToTable(filter = '' ) {
             let tdDelete = document.createElement('td');
             let deleteBtn = document.createElement('button');
 
-            tdName.innerText = key;
-            tdValue.innerText = cookiesObj[key];
+            tdName.innerText = cookieName;
+            tdValue.innerText = cookieValue;
             deleteBtn.innerText = ' удалить';
             deleteBtn.setAttribute('data-id', cookieName);
             tdDelete.appendChild(deleteBtn);
-
             newTr.appendChild(tdName);
             newTr.appendChild(tdValue);
             newTr.appendChild(tdDelete);
             listTable.appendChild(newTr);
-
         }
     }
 }
